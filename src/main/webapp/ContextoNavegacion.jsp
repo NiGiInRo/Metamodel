@@ -4,11 +4,20 @@
     Author     : nicol
 --%>
 
+<%@page import="Modelo.Usuario"%>
 <%@page import="Modelo.ContextoNavegacion"%>
 <%@page import="Modelo.Esquema"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+    HttpSession sesion = request.getSession();
+    Usuario usuario = (Usuario)sesion.getAttribute("nombre_us");
+    if( usuario == null){
+      response.sendRedirect("index.jsp");
+    }else{ 
+     // if(usuario.getDoc_Abogado()==4567){
+%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -90,3 +99,5 @@
         <a href="index.html"> Volver </a><br/>
     </body>
 </html>
+<%}//else{
+%>

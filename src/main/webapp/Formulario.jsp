@@ -4,11 +4,13 @@
     Author     : Diseño
 --%>
 
+<%@page import="Modelo.Usuario"%>
 <%@page import="Dao.DaoTable"%>
 <%@page import="Modelo.Columna"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <html>
     <body>
     
