@@ -26,7 +26,7 @@ public class ServletUsuario extends HttpServlet {
 
        private static final long serialVersionUID = 1L;
     private static String INSERT_OR_EDIT = "/Formulario.jsp";
-    private static String LIST_USUARIO = "/PerfilDeUsuario.jsp";
+    private static String LIST_USUARIO = "/index.jsp";
     private DAOUsuario dao;
 
     public ServletUsuario() {
