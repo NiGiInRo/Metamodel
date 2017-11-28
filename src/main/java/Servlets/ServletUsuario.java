@@ -39,14 +39,14 @@ public class ServletUsuario extends HttpServlet {
         String action = request.getParameter("action");
 
         if (action.equalsIgnoreCase("delete")){
-            int Doc_Usuario = Integer.parseInt(request.getParameter("Doc_Usuario"));
-            dao.deleteUsuario(Doc_Usuario);
+            int cedula = Integer.parseInt(request.getParameter("cedula"));
+            dao.deleteUsuario(cedula);
             forward = LIST_USUARIO;
             request.setAttribute("usuarios", dao.getAllUsuario());    
         } else if (action.equalsIgnoreCase("edit")){
             forward = INSERT_OR_EDIT;
-            int Doc_Usuarios = Integer.parseInt(request.getParameter("userId"));
-            Usuario usuario = dao.getUsuariosbyId(Doc_Usuarios);
+            int cedula = Integer.parseInt(request.getParameter("userId"));
+            Usuario usuario = dao.getUsuariosbyId(cedula);
             request.setAttribute("usuario", usuario);
         } else if (action.equalsIgnoreCase("listUser")){
             forward = LIST_USUARIO;

@@ -43,12 +43,12 @@ public class DAOUsuario {
 			e.printStackTrace();
 		}
 	}
-	public void deleteUsuario(int Doc_Usuario) {
+	public void deleteUsuario(int cedula) {
 		try {
 			PreparedStatement preparedStatement = connection
-					.prepareStatement("delete from Usuario where Doc_Usuario=?");
+					.prepareStatement("delete from Usuario where cedula=?");
 			// Parameters start with 1
-			preparedStatement.setInt(1, Doc_Usuario);
+			preparedStatement.setInt(1, cedula);
 			preparedStatement.executeUpdate();
 
 		} catch (SQLException e) {
@@ -101,7 +101,7 @@ public class DAOUsuario {
 			Statement statement = connection.createStatement();
                         
                         
-			ResultSet rs = statement.executeQuery("select * from Usuario");
+			ResultSet rs = statement.executeQuery("select * from usuario");
 			while (rs.next()) {
 				Usuario usuario = new Usuario();
 				usuario.setCedula(rs.getInt("cedula"));
@@ -117,19 +117,19 @@ public class DAOUsuario {
 
 		return usuarios;
 	}
-	public Usuario getUsuariosbyId(int Doc_Usuario) {
+	public Usuario getUsuariosbyId(int cedula) {
 		Usuario usuario = new Usuario();
 		try {
 			PreparedStatement preparedStatement = connection.
-					prepareStatement("select * from Usuario where Doc_Usuario=?");
-			preparedStatement.setInt(1, Doc_Usuario);
+					prepareStatement("select * from usuario where cedula=?");
+			preparedStatement.setInt(1, cedula);
 			ResultSet rs = preparedStatement.executeQuery();
 			
 			if (rs.next()) {
-				usuario.setCedula(rs.getInt("Doc_Usuario"));
-				usuario.setNombre(rs.getString("Nombre_Usuario"));
+				usuario.setCedula(rs.getInt("cedula"));
+				usuario.setNombre(rs.getString("nombre_us"));
 				
-                                usuario.setContrasena(rs.getString("Contrasena"));
+                                usuario.setContrasena(rs.getString("contrasena"));
                                 
 			}
 		} catch (SQLException e) {
