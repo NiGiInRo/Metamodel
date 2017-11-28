@@ -63,7 +63,7 @@ public class ServletUsuario extends HttpServlet {
         Usuario usuario = new Usuario();
         usuario.setNombre(request.getParameter("nombre_us"));
         
-        usuario.setContrasena(request.getParameter("Contrasena"));
+        usuario.setContrasena(request.getParameter("contrasena"));
    
         usuario.setCedula(Integer.parseInt(request.getParameter("cedula")));
 //        if(doc_abogado == null || doc_abogado.isEmpty())
