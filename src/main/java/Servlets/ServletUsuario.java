@@ -78,7 +78,7 @@ public class ServletUsuario extends HttpServlet {
         
         
         RequestDispatcher view = request.getRequestDispatcher(LIST_USUARIO);
-        request.setAttribute("abogados", dao.getAllUsuario());
+        request.setAttribute("usuarios", dao.getAllUsuario());
         view.forward(request, response);
     }
 }

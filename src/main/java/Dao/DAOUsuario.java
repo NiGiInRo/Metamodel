@@ -104,10 +104,10 @@ public class DAOUsuario {
 			ResultSet rs = statement.executeQuery("select * from Usuario");
 			while (rs.next()) {
 				Usuario usuario = new Usuario();
-				usuario.setCedula(rs.getInt("Doc_Usuario"));
-				usuario.setNombre(rs.getString("Nombre_Usuario"));
+				usuario.setCedula(rs.getInt("cedula"));
+				usuario.setNombre(rs.getString("nombre_us"));
 				
-                                usuario.setContrasena(rs.getString("Contrasena"));
+                                usuario.setContrasena(rs.getString("contrasena"));
                                 
 				usuarios.add(usuario);
 			}

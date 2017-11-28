@@ -18,7 +18,7 @@
     nombre:
     <input type="text" name="nombre_us">
     contrasena:
-    <input type="text" name="contrasena">
+    <input type="password" name="contrasena">
     
     <input type="submit" value="Submit">
         
