@@ -2,7 +2,8 @@
 package Dao;
 
 import Modelo.Table;
-import Util.Conexion;
+
+import Util.DbUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,11 +14,10 @@ import java.util.Random;
 
 
 public class DaoTable {
-      private Connection conexion;
+      private Connection connection;
 
     public DaoTable()throws SQLException {
-        Conexion db=Conexion.getConexion();
-        this.conexion=db.getConnection();
+        connection = DbUtil.getConnection();
     }     
     
     public boolean insertar(Table t) throws SQLException{
@@ -28,7 +28,7 @@ public class DaoTable {
         String consulta="INSERT INTO TABLA VALUES(?,?,?)";
         //2.Crear el prepareStament
           PreparedStatement statement;
-          statement=this.conexion.prepareStatement(consulta);
+          statement=this.connection.prepareStatement(consulta);
         
         //-------------------------------------------------
             statement.setInt(1, t.getIdTabla());
@@ -51,7 +51,7 @@ public class DaoTable {
         String query;
         Table t=null;
         Class.forName("com.mysql.jdbc.Driver").newInstance();
-        Statement stmt = (Statement) conexion.createStatement();
+        Statement stmt = (Statement) connection.createStatement();
         query = "SELECT * FROM Tabla WHERE nombre='" + nombre + "';";
         stmt.executeQuery(query);
         ResultSet rs = stmt.getResultSet();
@@ -74,7 +74,7 @@ public class DaoTable {
         String query;
         Table t=null;
         Class.forName("com.mysql.jdbc.Driver").newInstance();
-        Statement stmt = (Statement) conexion.createStatement();
+        Statement stmt = (Statement) connection.createStatement();
         query = "SELECT * FROM Tabla WHERE idTabla='" +id+ "';";
         stmt.executeQuery(query);
         ResultSet rs = stmt.getResultSet();
@@ -97,7 +97,7 @@ public class DaoTable {
         String query;
         Table t=null;
         Class.forName("com.mysql.jdbc.Driver").newInstance();
-        Statement stmt = (Statement) conexion.createStatement();
+        Statement stmt = (Statement) connection.createStatement();
         query = "DELETE * FROM TABLE WHERE idTable=" + idTable+ ";";
         stmt.executeQuery(query);
        
@@ -107,7 +107,7 @@ public class DaoTable {
       public ArrayList<Table> getTablas() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
    
             ArrayList<Table> historial = new ArrayList<Table>();
-            Statement stmt = (Statement) conexion.createStatement();
+            Statement stmt = (Statement) connection.createStatement();
             String query = "SELECT * FROM Table;";
             stmt.executeQuery(query);
             ResultSet rs = stmt.getResultSet();

@@ -6,7 +6,7 @@
 package Dao;
 
 import Modelo.ContextoNavegacion;
-import Util.Conexion;
+import Util.DbUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,11 +18,10 @@ import java.util.Random;
 
 public class DaoContextoNavegacion {
     
-     private Connection conexion;
+     private Connection connection;
 
     public DaoContextoNavegacion()throws SQLException {
-        Conexion db=Conexion.getConexion();
-        this.conexion=db.getConnection();
+        connection = DbUtil.getConnection();
     }     
     
     public boolean insertar(ContextoNavegacion CoTe) throws SQLException{
@@ -33,7 +32,7 @@ public class DaoContextoNavegacion {
         String consulta="INSERT INTO contextonavegacion VALUES(?,?)";
         //2.Crear el prepareStament
           PreparedStatement statement;
-          statement=this.conexion.prepareStatement(consulta);
+          statement=this.connection.prepareStatement(consulta);
         
         //-------------------------------------------------
             statement.setInt(1, CoTe.getId_CN());
@@ -55,7 +54,7 @@ public class DaoContextoNavegacion {
         String query;
         ContextoNavegacion CoTe=null;
         Class.forName("com.mysql.jdbc.Driver").newInstance();
-        Statement stmt = (Statement) conexion.createStatement();
+        Statement stmt = (Statement) connection.createStatement();
         query = "SELECT * FROM contextonavegacion WHERE Name_CN='" + nombre + "';";
         stmt.executeQuery(query);
         ResultSet rs = stmt.getResultSet();
@@ -74,7 +73,7 @@ public class DaoContextoNavegacion {
       public void deleteContextoNavegacion(int idContexto) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
           
         try {
-			PreparedStatement preparedStatement = conexion.prepareStatement("delete from contextonavegacion where Id_CN=?");
+			PreparedStatement preparedStatement = connection.prepareStatement("delete from contextonavegacion where Id_CN=?");
 			// Parameters start with 1
 			preparedStatement.setInt(1, idContexto);
 			preparedStatement.executeUpdate();
@@ -88,7 +87,7 @@ public class DaoContextoNavegacion {
       public ArrayList<ContextoNavegacion> getContextoNavegacion() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
    
             ArrayList<ContextoNavegacion> historial = new ArrayList<ContextoNavegacion>();
-            Statement stmt = (Statement) conexion.createStatement();
+            Statement stmt = (Statement) connection.createStatement();
             String query = "SELECT * FROM contextonavegacion;";
             stmt.executeQuery(query);
             ResultSet rs = stmt.getResultSet();
@@ -108,7 +107,7 @@ public class DaoContextoNavegacion {
       
       public void updateConextoNavegacion(ContextoNavegacion q, String name) {
 		try {
-			PreparedStatement preparedStatement = conexion.prepareStatement("update contextonavegacion set Name_CN='"+name+"' "+"where Id_CN="+q.getId_CN()+";");
+			PreparedStatement preparedStatement = connection.prepareStatement("update contextonavegacion set Name_CN='"+name+"' "+"where Id_CN="+q.getId_CN()+";");
 			
 			preparedStatement.executeUpdate();
 

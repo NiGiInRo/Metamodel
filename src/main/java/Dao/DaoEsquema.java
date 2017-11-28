@@ -2,7 +2,7 @@
 package Dao;
 
 import Modelo.Esquema;
-import Util.Conexion;
+import Util.DbUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,11 +14,10 @@ import java.util.Random;
 
 public class DaoEsquema {
         
-    private Connection conexion;
+    private Connection connection;
 
     public DaoEsquema()throws SQLException {
-        Conexion db=Conexion.getConexion();
-        this.conexion=db.getConnection();
+        connection = DbUtil.getConnection();
     }     
     
     public boolean insertar(Esquema esq) throws SQLException{
@@ -29,7 +28,7 @@ public class DaoEsquema {
         String consulta="INSERT INTO ESQUEMA VALUES(?,?)";
         //2.Crear el prepareStament
           PreparedStatement statement;
-          statement=this.conexion.prepareStatement(consulta);
+          statement=this.connection.prepareStatement(consulta);
         
         //-------------------------------------------------
             statement.setInt(1, esq.getIdEsquema());
@@ -51,7 +50,7 @@ public class DaoEsquema {
         String query;
         Esquema esq=null;
         Class.forName("com.mysql.jdbc.Driver").newInstance();
-        Statement stmt = (Statement) conexion.createStatement();
+        Statement stmt = (Statement) connection.createStatement();
         query = "SELECT * FROM ESQUEMA WHERE nombre='" + nombre + "';";
         stmt.executeQuery(query);
         ResultSet rs = stmt.getResultSet();
@@ -70,7 +69,7 @@ public class DaoEsquema {
       public void deleteEsquema(int idEsquema) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
           
         try {
-			PreparedStatement preparedStatement = conexion.prepareStatement("delete from Esquema where idEsquema=?");
+			PreparedStatement preparedStatement = connection.prepareStatement("delete from Esquema where idEsquema=?");
 			// Parameters start with 1
 			preparedStatement.setInt(1, idEsquema);
 			preparedStatement.executeUpdate();
@@ -84,7 +83,7 @@ public class DaoEsquema {
       public ArrayList<Esquema> getEsquemas() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
    
             ArrayList<Esquema> historial = new ArrayList<Esquema>();
-            Statement stmt = (Statement) conexion.createStatement();
+            Statement stmt = (Statement) connection.createStatement();
             String query = "SELECT * FROM Esquema;";
             stmt.executeQuery(query);
             ResultSet rs = stmt.getResultSet();
@@ -104,7 +103,7 @@ public class DaoEsquema {
       
       public void updateEsquema(Esquema q, String name) {
 		try {
-			PreparedStatement preparedStatement = conexion.prepareStatement("update esquema set nombre='"+name+"' "+"where idEsquema="+q.getIdEsquema()+";");
+			PreparedStatement preparedStatement = connection.prepareStatement("update esquema set nombre='"+name+"' "+"where idEsquema="+q.getIdEsquema()+";");
 			
 			preparedStatement.executeUpdate();
 

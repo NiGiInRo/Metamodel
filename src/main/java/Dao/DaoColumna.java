@@ -3,7 +3,7 @@ package Dao;
 
 import Modelo.Columna;
 
-import Util.Conexion;
+import Util.DbUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,11 +18,10 @@ import java.util.Random;
  */
 public class DaoColumna {
     
-        private Connection conexion;
+        private Connection connection;
 
     public DaoColumna()throws SQLException {
-        Conexion db=Conexion.getConexion();
-        this.conexion=db.getConnection();
+        connection = DbUtil.getConnection();
     }     
     
     public boolean insertar(Columna col) throws SQLException{
@@ -33,7 +32,7 @@ public class DaoColumna {
         String consulta="INSERT INTO COLUMNA VALUES(?,?,?,?)";
         //2.Crear el prepareStament
           PreparedStatement statement;
-          statement=this.conexion.prepareStatement(consulta);
+          statement=this.connection.prepareStatement(consulta);
         
         //-------------------------------------------------
             
@@ -58,7 +57,7 @@ public class DaoColumna {
         String query;
         Columna col=null;
         Class.forName("com.mysql.jdbc.Driver").newInstance();
-        Statement stmt = (Statement) conexion.createStatement();
+        Statement stmt = (Statement) connection.createStatement();
         query = "SELECT * FROM columna WHERE nombre='" + nombre + "';";
         stmt.executeQuery(query);
         ResultSet rs = stmt.getResultSet();
@@ -80,7 +79,7 @@ public class DaoColumna {
      public void deleteColumna(int idColumna) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
           
         try {
-			PreparedStatement preparedStatement = conexion.prepareStatement("delete from Columna where idColumna=?");
+			PreparedStatement preparedStatement = connection.prepareStatement("delete from Columna where idColumna=?");
 			// Parameters start with 
 			preparedStatement.setInt(1, idColumna);
 			preparedStatement.executeUpdate();
@@ -91,7 +90,7 @@ public class DaoColumna {
     }public ArrayList<Columna> getColumnas() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
    
             ArrayList<Columna> historial = new ArrayList<Columna>();
-            Statement stmt = (Statement) conexion.createStatement();
+            Statement stmt = (Statement) connection.createStatement();
             String query = "SELECT * FROM Columna;";
             stmt.executeQuery(query);
             ResultSet rs = stmt.getResultSet();
@@ -113,7 +112,7 @@ public class DaoColumna {
     }
       public void updateColumna(Columna q, String name) {
 		try {
-			PreparedStatement preparedStatement = conexion.prepareStatement("update columna set nombre='"+name+"' "+"where idColumna="+q.getIdColumna()+";");
+			PreparedStatement preparedStatement = connection.prepareStatement("update columna set nombre='"+name+"' "+"where idColumna="+q.getIdColumna()+";");
 			
 			preparedStatement.executeUpdate();
 

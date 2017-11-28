@@ -6,7 +6,7 @@
 package Dao;
 
 import Modelo.UnidadAbstractaInformacion;
-import Util.Conexion;
+import Util.DbUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,11 +21,10 @@ import java.util.Random;
  */
 public class DaoUnidadAbstractaInformacion {
     
-     private Connection conexion;
+     private Connection connection;
 
     public DaoUnidadAbstractaInformacion()throws SQLException {
-        Conexion db=Conexion.getConexion();
-        this.conexion=db.getConnection();
+         connection = DbUtil.getConnection();
     }     
     
     public boolean insertar(UnidadAbstractaInformacion UnAbIn) throws SQLException{
@@ -36,7 +35,7 @@ public class DaoUnidadAbstractaInformacion {
         String consulta="INSERT INTO UnidadAbstracta VALUES(?,?)";
         //2.Crear el prepareStament
           PreparedStatement statement;
-          statement=this.conexion.prepareStatement(consulta);
+          statement=this.connection.prepareStatement(consulta);
         
         //-------------------------------------------------
             statement.setInt(1, UnAbIn.getId_UA());
@@ -58,7 +57,7 @@ public class DaoUnidadAbstractaInformacion {
         String query;
         UnidadAbstractaInformacion UnAbIn=null;
         Class.forName("com.mysql.jdbc.Driver").newInstance();
-        Statement stmt = (Statement) conexion.createStatement();
+        Statement stmt = (Statement) connection.createStatement();
         query = "SELECT * FROM UnidadAbstracta WHERE Name_CN='" + nombre + "';";
         stmt.executeQuery(query);
         ResultSet rs = stmt.getResultSet();
@@ -77,7 +76,7 @@ public class DaoUnidadAbstractaInformacion {
       public void deleteUnidadAbstractaInformacion(int idUnAbIn) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
           
         try {
-			PreparedStatement preparedStatement = conexion.prepareStatement("delete from UnidadAbstracta where Id_UA=?");
+			PreparedStatement preparedStatement = connection.prepareStatement("delete from UnidadAbstracta where Id_UA=?");
 			// Parameters start with 1
 			preparedStatement.setInt(1, idUnAbIn);
 			preparedStatement.executeUpdate();
@@ -91,7 +90,7 @@ public class DaoUnidadAbstractaInformacion {
       public ArrayList<UnidadAbstractaInformacion> getAbstractaInformacion() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
    
             ArrayList<UnidadAbstractaInformacion> historial = new ArrayList<UnidadAbstractaInformacion>();
-            Statement stmt = (Statement) conexion.createStatement();
+            Statement stmt = (Statement) connection.createStatement();
             String query = "SELECT * FROM UnidadAbstracta;";
             stmt.executeQuery(query);
             ResultSet rs = stmt.getResultSet();
@@ -111,7 +110,7 @@ public class DaoUnidadAbstractaInformacion {
       
       public void updateUnidadAbstractaInformacion(UnidadAbstractaInformacion q, String name) {
 		try {
-			PreparedStatement preparedStatement = conexion.prepareStatement("update UnidadAbstracta set Name_UA='"+name+"' "+"where Id_UA="+q.getId_UA()+";");
+			PreparedStatement preparedStatement = connection.prepareStatement("update UnidadAbstracta set Name_UA='"+name+"' "+"where Id_UA="+q.getId_UA()+";");
 			
 			preparedStatement.executeUpdate();
 

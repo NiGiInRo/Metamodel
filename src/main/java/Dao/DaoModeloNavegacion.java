@@ -7,7 +7,7 @@ package Dao;
 
 
 import Modelo.ModeloNavegacion;
-import Util.Conexion;
+import Util.DbUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,11 +22,10 @@ import java.util.Random;
  */
 public class DaoModeloNavegacion {
     
-     private Connection conexion;
+     private Connection connection;
 
     public DaoModeloNavegacion()throws SQLException {
-        Conexion db=Conexion.getConexion();
-        this.conexion=db.getConnection();
+         connection = DbUtil.getConnection();
     }     
     
     public boolean insertar(ModeloNavegacion MoNa) throws SQLException{
@@ -37,7 +36,7 @@ public class DaoModeloNavegacion {
         String consulta="INSERT INTO ModeloNavegacion VALUES(?,?)";
         //2.Crear el prepareStament
           PreparedStatement statement;
-          statement=this.conexion.prepareStatement(consulta);
+          statement=this.connection.prepareStatement(consulta);
         
         //-------------------------------------------------
             statement.setInt(1, MoNa.getId_MDN());
@@ -59,7 +58,7 @@ public class DaoModeloNavegacion {
         String query;
         ModeloNavegacion MoNa=null;
         Class.forName("com.mysql.jdbc.Driver").newInstance();
-        Statement stmt = (Statement) conexion.createStatement();
+        Statement stmt = (Statement) connection.createStatement();
         query = "SELECT * FROM ModeloNavegacion WHERE Name_MDN='" + nombre + "';";
         stmt.executeQuery(query);
         ResultSet rs = stmt.getResultSet();
@@ -78,7 +77,7 @@ public class DaoModeloNavegacion {
       public void deleteModeloNavegacion(int IdModelo) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
           
         try {
-			PreparedStatement preparedStatement = conexion.prepareStatement("delete from ModeloNavegacion where Id_MDN=?");
+			PreparedStatement preparedStatement = connection.prepareStatement("delete from ModeloNavegacion where Id_MDN=?");
 			// Parameters start with 1
 			preparedStatement.setInt(1, IdModelo);
 			preparedStatement.executeUpdate();
@@ -92,7 +91,7 @@ public class DaoModeloNavegacion {
       public ArrayList<ModeloNavegacion> getModeloNavegacion() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
    
             ArrayList<ModeloNavegacion> historial = new ArrayList<ModeloNavegacion>();
-            Statement stmt = (Statement) conexion.createStatement();
+            Statement stmt = (Statement) connection.createStatement();
             String query = "SELECT * FROM ModeloNavegacion;";
             stmt.executeQuery(query);
             ResultSet rs = stmt.getResultSet();
@@ -112,7 +111,7 @@ public class DaoModeloNavegacion {
       
       public void updateModeloNavegacion(ModeloNavegacion q, String name) {
 		try {
-			PreparedStatement preparedStatement = conexion.prepareStatement("update ModeloNavegacion set Name_MDN='"+name+"' "+"where Id_MDM="+q.getId_MDN()+";");
+			PreparedStatement preparedStatement = connection.prepareStatement("update ModeloNavegacion set Name_MDN='"+name+"' "+"where Id_MDM="+q.getId_MDN()+";");
 			
 			preparedStatement.executeUpdate();
 
