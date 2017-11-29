@@ -2,7 +2,7 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
      <servlet>
         <servlet-name>ServletUsuario</servlet-name>
-        <servlet-class>Controlador.ServletUsuario</servlet-class>
+        <servlet-class>Servlets.ServletUsuario</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Servlet</servlet-name>
