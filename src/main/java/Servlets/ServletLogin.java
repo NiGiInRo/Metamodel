@@ -67,8 +67,8 @@ public class ServletLogin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         String login = request.getParameter("Email");
-        String pass = request.getParameter("Contrasena");
+         String login = request.getParameter("nombre_us");
+        String pass = request.getParameter("contrasena");
         
         
         Usuario datosUsuario = new Usuario();
