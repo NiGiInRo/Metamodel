@@ -13,7 +13,7 @@ public class Table {
     
     private int idTabla;
     private String name;
-    Esquema idEsquema= new Esquema();
+    private int idEsquema;
 
     public Table() {
     }
@@ -34,14 +34,15 @@ public class Table {
         this.name = name;
     }
 
-    public Esquema getIdEsquema() {
+    public int getIdEsquema() {
         return idEsquema;
     }
 
-
-    public void setIdEsquema(Esquema idEsquema) {
+    public void setIdEsquema(int idEsquema) {
         this.idEsquema = idEsquema;
     }
+
+    
 
     @Override
     public String toString() {

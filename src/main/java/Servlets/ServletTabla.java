@@ -5,6 +5,7 @@ import Dao.DaoEsquema;
 import Dao.DaoTable;
 import Modelo.Esquema;
 import Modelo.Table;
+import Modelo.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -15,9 +16,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class ServletTabla extends HttpServlet {
 
+    private DaoTable dao;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -34,32 +37,21 @@ public class ServletTabla extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-             PrintWriter out = response.getWriter();
-            String tabla = request.getParameter("tabla");
-            String nombre = request.getParameter("nombre");
-            
-            DaoTable dt;
-            
         try {
-            DaoEsquema d= new DaoEsquema();
-            dt = new DaoTable();
-            Table t= new Table();
+            PrintWriter out = response.getWriter();
+            Table table = new Table();
+            HttpSession sesionUsuario = request.getSession();
             
-            t.setIdTabla(dt.idgenerado());
-            t.setName(tabla);
-            Esquema s=new Esquema();
-            t.setIdEsquema(d.objetoEsquema(nombre));
-            dt.insertar(t);
-             RequestDispatcher rd = request.getRequestDispatcher("menu.jsp");
-            rd.forward(request, response);
-        
+            
+            
+            table.setName(request.getParameter("nombre"));
+            
+            
+            table.setIdEsquema((table.getIdEsquema()));
+            
+
+              dao.insertar(table);
         } catch (SQLException ex) {
-            Logger.getLogger(Servlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ServletTabla.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(ServletTabla.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
             Logger.getLogger(ServletTabla.class.getName()).log(Level.SEVERE, null, ex);
         }
          

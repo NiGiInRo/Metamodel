@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 
@@ -33,7 +34,7 @@ public class DaoTable {
         //-------------------------------------------------
             statement.setInt(1, t.getIdTabla());
             statement.setString(2, t.getName());
-            statement.setInt(3, t.getIdEsquema().getIdEsquema());
+            statement.setInt(3, t.getIdEsquema());
           //-----------------------------------------------
 
           
@@ -64,7 +65,7 @@ public class DaoTable {
            t= new Table();
           t.setIdTabla(rs.getInt("idTabla"));
           t.setName(rs.getString("nombre"));
-          t.setIdEsquema(de.objetoEsquema(rs.getString("nombre")));
+          
           }
         
         return t;
@@ -87,7 +88,7 @@ public class DaoTable {
            t= new Table();
           t.setIdTabla(rs.getInt("idTabla"));
           t.setName(rs.getString("nombre"));
-          t.setIdEsquema(de.objetoEsquema(rs.getString("nombre")));
+          
           }
         
         return t;
@@ -127,6 +128,28 @@ public class DaoTable {
             return historial;
    
     }
+      
+        public List<Table> gettablesEsquema(int idEsquema) {
+		List<Table> tables = new ArrayList<Table>();
+		try {
+                     
+			Statement statement = connection.createStatement();
+                        
+                        
+			ResultSet rs = statement.executeQuery("select * from TABLA where idEsquema="+ idEsquema);
+			while (rs.next()) {
+				Table table = new Table();
+				
+				table.setName(rs.getString("nombre"));
+				
+                                tables.add(table);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return tables;
+	}
       
       public int idgenerado() {
 
