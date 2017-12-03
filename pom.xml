@@ -4,6 +4,7 @@
     <groupId>usa.edu.bd</groupId>
     <artifactId>crudEjemplo</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
     <name>MetamodelFinal</name>
     <properties>
         <server.deploy.dir>UTF-8</server.deploy.dir>
