@@ -50,7 +50,7 @@ public class ServletTabla extends HttpServlet {
             Esquema s=new Esquema();
             t.setIdEsquema(d.objetoEsquema(nombre));
             dt.insertar(t);
-             RequestDispatcher rd = request.getRequestDispatcher("index.html");
+             RequestDispatcher rd = request.getRequestDispatcher("menu.jsp");
             rd.forward(request, response);
         
         } catch (SQLException ex) {
