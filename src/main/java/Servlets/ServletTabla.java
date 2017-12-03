@@ -44,7 +44,7 @@ public class ServletTabla extends HttpServlet {
             
             
             
-            table.setName(request.getParameter("nombre"));
+            table.setName(request.getParameter("nombret"));
             
             
             table.setIdEsquema((table.getIdEsquema()));

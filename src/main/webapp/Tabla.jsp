@@ -22,7 +22,7 @@
     </head>
     <body>
          <form method="POST" action='ServletTabla' >
-        Nombre de la Tabla: <input type="text" name="tabla"/> <br />
+        Nombre de la Tabla: <input type="text" name="nombret"/> <br />
         <br/>
         Nombre del esquema: <input type="text" name="nombre"/> <br />
         <br/>
