@@ -118,7 +118,7 @@
                                  <input type="submit" VALUE ="HISTORIAL"/><br/>  
                 
          </form>
-                            <a href="index.html"> Volver </a><br/>
+                            <a href="menu.jsp"> Volver </a><br/>
     </body>
 </html>
 <%}//else{
