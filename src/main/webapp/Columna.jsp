@@ -44,12 +44,18 @@
        <br />
        <br />
         <form method="POST" action='ServletColumna' name="frmAddUser">
-        Nombre de la Columna: <input type="text" name="nombre"/> <br /> 
+        Nombre de la Columna: <input type="text" name="col"/> <br /> 
         <br /> 
         Tipo de dato: <input type="text" name="tipoDato"/> <br /> 
         <br /> 
         Nombre de la Tabla: <input type="text" name="tabla"/> <br /> 
         <br /> 
+        
+        <select class="form-control" name="tipoColumna">
+            <option>PK</option>
+            <option>FK</option>
+            
+        </select>
         
         <input type="submit" value="CREAR" />
     </form>

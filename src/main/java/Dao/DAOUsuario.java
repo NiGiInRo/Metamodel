@@ -32,7 +32,7 @@ public class DAOUsuario {
 			PreparedStatement preparedStatement = connection
 					.prepareStatement("insert into usuario(cedula,nombre_us,contrasena) values (?, ?, ?)");
 			// Parameters start with 1
-                        System.out.println("insert into Abogado(Doc_Abogado,Nombre_Abogado,Apellido_Abogado,Actividad,Email,Contraseña,Ciudad,Tipo_Doc) values (?, ?, ?, ?, ?, ?, ?, ? )");
+                        System.out.println("insert into Abogado(Doc_Abogado,Nombre_Abogado,Apellido_Abogado,Actividad,Email,Contraseï¿½a,Ciudad,Tipo_Doc) values (?, ?, ?, ?, ?, ?, ?, ? )");
                         preparedStatement.setInt(1, usuario.getCedula());
                         preparedStatement.setString(2, usuario.getNombre());
 			preparedStatement.setString(3, usuario.getContrasena());
@@ -61,7 +61,7 @@ public class DAOUsuario {
 		try {
                     if(connection!=null){
 			PreparedStatement preparedStatement = connection
-					.prepareStatement("update Abogado set Nombre_Abogado=?, Apellido_Abogado=?, Actividad=?, Email=?, Contraseña=?, Ciudad=?, Tipo_Doc=?" + 
+					.prepareStatement("update Abogado set Nombre_Abogado=?, Apellido_Abogado=?, Actividad=?, Email=?, Contraseï¿½a=?, Ciudad=?, Tipo_Doc=?" + 
 							"where Doc_Abogado=?");
 			// Parameters start with 1
 			preparedStatement.setInt(1, abogado.getDoc_Abogado());
@@ -69,7 +69,7 @@ public class DAOUsuario {
 			preparedStatement.setString(3, abogado.getApellido_Abogado());
 			preparedStatement.setString(4, abogado.isActividad());
 			preparedStatement.setString(5, abogado.getEmail());
-                        preparedStatement.setString(6, abogado.getContraseña());
+                        preparedStatement.setString(6, abogado.getContraseï¿½a());
                         preparedStatement.setString(7, abogado.getCiudad());
                         preparedStatement.setString(8, abogado.getTipo_Doc());
 			preparedStatement.executeUpdate();
@@ -159,7 +159,7 @@ public class DAOUsuario {
             abogado.setApellido_Abogado(rs.getString("Apellido_Abogado"));
             abogado.setActividad(rs.getString("Actividad"));
             abogado.setEmail(rs.getString("Email"));
-            abogado.setContraseña(rs.getString("Contraseña"));
+            abogado.setContraseï¿½a(rs.getString("Contraseï¿½a"));
             abogado.setCiudad(rs.getString("Ciudad"));
             abogado.setTipo_Doc(rs.getString("Tipo_Documento"));
            */

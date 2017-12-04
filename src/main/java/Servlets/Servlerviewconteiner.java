@@ -5,16 +5,11 @@
  */
 package Servlets;
 
-import Dao.DaoColumna;
-import Dao.DaoEsquema;
-import Dao.DaoUnidadAbstractaInformacion;
-import Modelo.Columna;
-import Modelo.Esquema;
-import Modelo.UnidadAbstractaInformacion;
+import Dao.DaoViewconteiner;
+import Modelo.Viewconteiner;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -27,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author nicol
  */
-public class ServletUnidadAbstractInformacion extends HttpServlet {
+public class Servlerviewconteiner extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,7 +35,6 @@ public class ServletUnidadAbstractInformacion extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
         
     }
 
@@ -56,55 +50,55 @@ public class ServletUnidadAbstractInformacion extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-         ArrayList<UnidadAbstractaInformacion> lista = null;
-        DaoUnidadAbstractaInformacion de;
-
-        try {
-            de = new DaoUnidadAbstractaInformacion();
-            lista = de.getAbstractaInformacion();
-
-            request.setAttribute("Unidades", lista);
-
-            RequestDispatcher rd = request.getRequestDispatcher("U  nidadAbstractInformacion.jsp");
-            rd.forward(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(ServletColumna.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ServletColumna.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(ServletColumna.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(ServletColumna.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
-    
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
-         PrintWriter out = response.getWriter();
-            String unidad = request.getParameter("unabin");
-            
-            DaoUnidadAbstractaInformacion uai;
+        
+        
         try {
-            uai = new DaoUnidadAbstractaInformacion();
-            UnidadAbstractaInformacion ua= new UnidadAbstractaInformacion();
-            ua.setId_UA(uai.idgenerado());
-            ua.setName_UA(unidad);
-            uai.insertar(ua);
+            String nombre = request.getParameter("nameconteiner");
+            String tipo = request.getParameter("isdefault");
+            String mensaje = request.getParameter("isxor");
+            String comentario = request.getParameter("protected");
+            String valor = request.getParameter("landmark");
             
-             RequestDispatcher rd = request.getRequestDispatcher("UnidadAbstractInformacion.jsp");
+            
+            DaoViewconteiner de;
+        
+            de = new DaoViewconteiner();
+            Viewconteiner esq= new Viewconteiner();
+            esq.setIdconteiner(de.idgenerado());
+            esq.setNameconteiner(nombre);
+            esq.setIsdefault(tipo);
+            esq.setIsxor(mensaje);
+            esq.setProtectedd(comentario);
+            esq.setLandmark(valor);
+            de.insertar(esq);
+             RequestDispatcher rd = request.getRequestDispatcher("viewconteiner.jsp");
             rd.forward(request, response);
-        
         } catch (SQLException ex) {
-            Logger.getLogger(Servlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Servlerviewconteiner.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+            
         
     }
 
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
     @Override
     public String getServletInfo() {
         return "Short description";

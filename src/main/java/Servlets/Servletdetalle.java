@@ -5,22 +5,24 @@
  */
 package Servlets;
 
-import Dao.DAOUsuario;
-import Modelo.Usuario;
+import Dao.DaoDetalle;
+import Modelo.Detalle;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author nicol
  */
-public class ServletLogin extends HttpServlet {
+public class Servletdetalle extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,7 +35,8 @@ public class ServletLogin extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-     
+        
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -48,12 +51,7 @@ public class ServletLogin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       HttpSession sesionUsuario = request.getSession();
-        Usuario _sesionUsuario = (Usuario)sesionUsuario.getAttribute("nombre_us");
-        if(_sesionUsuario!=null){
-          sesionUsuario.invalidate();
-          response.sendRedirect("index.jsp");
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -67,38 +65,25 @@ public class ServletLogin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         String login = request.getParameter("nombre_us");
-        String pass = request.getParameter("contrasena");
-        
-        
-        Usuario datosUsuario = new Usuario();
-        datosUsuario.setNombre(login);
-        datosUsuario.setContrasena(pass);
-        System.out.println(datosUsuario);
-        
-        //Validaciones
-        DAOUsuario userDao = new DAOUsuario();
-        Usuario sesion = userDao.validar(datosUsuario);
-        HttpSession sesionUsuario = request.getSession();
-        Usuario _sesionUsuario = (Usuario)sesionUsuario.getAttribute("nombre_us");
-        if(_sesionUsuario==null){
-         //El usuario no a creado la sesion
-          if(sesion != null){
-            sesionUsuario.setAttribute("nombre_us", sesion);
-            sesionUsuario.setMaxInactiveInterval(30);
-              System.out.println("ola");
-            response.sendRedirect("menu.jsp");
-          }else{
-             response.sendRedirect("index.jsp");
-              System.out.println("aqui");
-          }
-         
-        }else{
-          response.sendRedirect("menu.jsp");
-            System.out.println("aqui2");
-        } 
-        
        
+        try {
+            PrintWriter out = response.getWriter();
+            String detalle = request.getParameter("namedetalle");
+            
+            DaoDetalle de;
+        
+            de = new DaoDetalle();
+            Detalle esq= new Detalle();
+            esq.setIddetalle(de.idgenerado());
+            esq.setNamedetalle(detalle);
+            de.insertar(esq);
+            
+            RequestDispatcher rd = request.getRequestDispatcher("detalle.jsp");
+            rd.forward(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(Servletdetalle.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     /**

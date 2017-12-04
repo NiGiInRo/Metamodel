@@ -29,7 +29,7 @@ public class DaoColumna {
     
         try{
         //!.Establecer la consulta
-        String consulta="INSERT INTO COLUMNA VALUES(?,?,?,?)";
+        String consulta="INSERT INTO COLUMNA VALUES(?,?,?,?,?)";
         //2.Crear el prepareStament
           PreparedStatement statement;
           statement=this.connection.prepareStatement(consulta);
@@ -40,6 +40,7 @@ public class DaoColumna {
             statement.setString(2, col.getName());
             statement.setInt(3, col.getIdTabla());
             statement.setString(4, col.getDataType()); 
+            statement.setString(5, col.getTipoClave()); 
           //-----------------------------------------------
 
           
@@ -70,6 +71,7 @@ public class DaoColumna {
             col.setIdColumna(rs.getInt("idColumna"));
             col.setName(rs.getString("nombre"));
             col.setDataType(rs.getString("tipoDato"));
+            col.setTipoClave(rs.getString("tipoColumna"));
             col.setIdTabla(dt.objetoTableID(rs.getInt("idTabla")).getIdTabla());
           }
         
@@ -103,6 +105,7 @@ public class DaoColumna {
                 col.setIdColumna(rs.getInt("idColumna"));
                 col.setName(rs.getString("nombre"));
                 col.setDataType(rs.getString("tipoDato"));
+                col.setTipoClave(rs.getString("tipoColumna"));
                 col.setIdTabla(dt.objetoTableID(rs.getInt("idTabla")).getIdTabla());
                 historial.add(col);
                 

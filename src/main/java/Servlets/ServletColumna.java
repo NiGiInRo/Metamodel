@@ -69,6 +69,7 @@ public class ServletColumna extends HttpServlet {
         String nombre = request.getParameter("col");
         String tipoDato = request.getParameter("tipoDato");
         String tabla = request.getParameter("tabla");
+          String tipo = request.getParameter("tipoColumna");
         
         DaoColumna dc;
         DaoTable dt;
@@ -80,6 +81,7 @@ public class ServletColumna extends HttpServlet {
             cc.setDataType(tipoDato);
             cc.setIdTabla(dt.objetoTable(tabla).getIdTabla());
             cc.setName(nombre);
+            cc.setTipoClave(tipo);
             dc.insertar(cc);
             
              RequestDispatcher rd = request.getRequestDispatcher("Columna.jsp");

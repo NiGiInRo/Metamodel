@@ -5,10 +5,10 @@
  */
 package Servlets;
 
-import Dao.DaoContextoNavegacion;
-import Dao.DaoEsquema;
-import Modelo.ContextoNavegacion;
-import Modelo.Esquema;
+import Dao.DaoInteractionflow;
+import Dao.DaoViewelement;
+import Modelo.Interactionflow;
+import Modelo.Viewelement;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author nicol
  */
-public class ServletActualizarContexto extends HttpServlet {
+public class Servletviewelement extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,8 +37,7 @@ public class ServletActualizarContexto extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-      
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -67,36 +66,46 @@ public class ServletActualizarContexto extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-         PrintWriter out = response.getWriter();
-            String co = request.getParameter("contexto");
-            String co2 = request.getParameter("contexto2");
-            
-            DaoContextoNavegacion de;
         try {
-            de = new DaoContextoNavegacion();
-            ContextoNavegacion esq= new ContextoNavegacion();
+            String name = request.getParameter("nameelement");
+            String interaction = request.getParameter("nameinteraction");
+            DaoViewelement dt;
             
-            esq=de.objetoContextoNavegacion(co);
-            de.updateConextoNavegacion(esq, co2);
             
-            RequestDispatcher rd = request.getRequestDispatcher("ContextoNavegacion.jsp");
+            DaoInteractionflow d= new DaoInteractionflow();
+            dt = new DaoViewelement();
+            Viewelement t= new Viewelement();
+            
+            t.setIdelement(dt.idgenerado());
+            t.setNameelement(name);
+            
+            
+            Interactionflow s = new Interactionflow();
+            
+            try {
+                t.setIdinteraction(d.objetointeraction(interaction));
+                dt.insertar(t);
+            RequestDispatcher rd = request.getRequestDispatcher("viewelement.jsp");
             rd.forward(request, response);
-        
+                
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Servletviewelement.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InstantiationException ex) {
+                Logger.getLogger(Servletviewelement.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IllegalAccessException ex) {
+                Logger.getLogger(Servletviewelement.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           
         } catch (SQLException ex) {
-            Logger.getLogger(ServletActualizar.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ServletActualizar.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(ServletActualizar.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(ServletActualizar.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Servletviewelement.class.getName()).log(Level.SEVERE, null, ex);
         }
-      
-
     }
 
-    
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
     @Override
     public String getServletInfo() {
         return "Short description";

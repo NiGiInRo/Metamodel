@@ -5,10 +5,8 @@
  */
 package Servlets;
 
-import Dao.DaoContextoNavegacion;
-import Dao.DaoEsquema;
-import Modelo.ContextoNavegacion;
-import Modelo.Esquema;
+import Dao.DaoLista;
+import Modelo.Lista;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -24,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author nicol
  */
-public class ServletEliminarContexto extends HttpServlet {
+public class lista extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,8 +35,7 @@ public class ServletEliminarContexto extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-       
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -67,32 +64,34 @@ public class ServletEliminarContexto extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-     
-        String co = request.getParameter("contexto");
-            
-            DaoContextoNavegacion de;
+       
         try {
-            de = new DaoContextoNavegacion();
-            ContextoNavegacion esqu= new ContextoNavegacion();
+            PrintWriter out = response.getWriter();
+            String lista = request.getParameter("namelista");
             
-            esqu= de.objetoContextoNavegacion(co);
-            System.out.println(esqu.toString());
-            de.deleteContextoNavegacion(esqu.getId_CN());
-            RequestDispatcher rd = request.getRequestDispatcher("ContextoNavegacion.jsp");
-            rd.forward(request, response);
+            DaoLista de;
         
+            de = new DaoLista();
+            Lista esq= new Lista();
+            esq.setIdlist(de.idgenerado());
+            esq.setNamelista(lista);
+            de.insertar(esq);
+            
+            RequestDispatcher rd = request.getRequestDispatcher("lista.jsp");
+            rd.forward(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(ServletDelete.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ServletDelete.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(ServletDelete.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(ServletDelete.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(lista.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
+        
     }
 
-   
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
     @Override
     public String getServletInfo() {
         return "Short description";

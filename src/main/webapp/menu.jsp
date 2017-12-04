@@ -42,8 +42,19 @@
             <a href="Esquema.jsp"> Esquema </a><br/> 
             <a href="Tabla.jsp"> Tabla</a><br/> 
             <a href="Columna.jsp"> Columna </a><br/> 
-            <a href="ContextoNavegacion.jsp"> ContextoNavegacion </a><br/> 
-            <a href="UnidadAbstractInformacion.jsp"> Unidad </a><br/> 
+            <a href="lista.jsp"> lista </a><br/>
+            <a href="detalle.jsp"> detalle </a><br/> 
+            <a href="form.jsp"> form </a><br/> 
+            <a href="campo.jsp"> campo </a><br/> 
+            <a href="camposimple.jsp"> campo simple </a><br/> 
+            <a href="camposeleccion.jsp"> campo seleccion </a><br/> 
+            <a href="interactionflow.jsp"> interaction flow </a><br/> 
+            <a href="viewelement.jsp"> view element </a><br/> 
+            <a href="viewconteiner.jsp"> view conteiner </a><br/> 
+            <a href="viewcomponent.jsp"> view component (no funciona) </a><br/> 
+           
+            
+            
             <br>
       
            

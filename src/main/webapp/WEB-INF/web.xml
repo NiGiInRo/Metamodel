@@ -64,6 +64,58 @@
         <servlet-name>ServletUnidadAbstractInformacion</servlet-name>
         <servlet-class>Servlets.ServletUnidadAbstractInformacion</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>lista</servlet-name>
+        <servlet-class>Servlets.lista</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Servletdetalle</servlet-name>
+        <servlet-class>Servlets.Servletdetalle</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Servletform</servlet-name>
+        <servlet-class>Servlets.Servletform</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletCampo</servlet-name>
+        <servlet-class>Servlets.ServletCampo</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletCamposimple</servlet-name>
+        <servlet-class>Servlets.ServletCamposimple</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletCampoSeleccion</servlet-name>
+        <servlet-class>Servlets.ServletCampoSeleccion</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Servletinteractionflow</servlet-name>
+        <servlet-class>Servlets.Servletinteractionflow</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Servletviewelement</servlet-name>
+        <servlet-class>Servlets.Servletviewelement</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Servlerviewconteiner</servlet-name>
+        <servlet-class>Servlets.Servlerviewconteiner</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Servletviewcomponent</servlet-name>
+        <servlet-class>Servlets.Servletviewcomponent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletPGB</servlet-name>
+        <servlet-class>Servlets.ServletPGB</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletPG</servlet-name>
+        <servlet-class>Servlets.ServletPG</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Servletparameter</servlet-name>
+        <servlet-class>Servlets.Servletparameter</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletUsuario</servlet-name>
         <url-pattern>/ServletUsuario</url-pattern>
@@ -127,6 +179,58 @@
     <servlet-mapping>
         <servlet-name>ServletLogin</servlet-name>
         <url-pattern>/ServletLogin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>lista</servlet-name>
+        <url-pattern>/lista</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Servletdetalle</servlet-name>
+        <url-pattern>/Servletdetalle</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Servletform</servlet-name>
+        <url-pattern>/Servletform</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletCampo</servlet-name>
+        <url-pattern>/ServletCampo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletCamposimple</servlet-name>
+        <url-pattern>/ServletCamposimple</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletCampoSeleccion</servlet-name>
+        <url-pattern>/ServletCampoSeleccion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Servletinteractionflow</servlet-name>
+        <url-pattern>/Servletinteractionflow</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Servletviewelement</servlet-name>
+        <url-pattern>/Servletviewelement</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Servlerviewconteiner</servlet-name>
+        <url-pattern>/Servlerviewconteiner</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Servletviewcomponent</servlet-name>
+        <url-pattern>/Servletviewcomponent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletPGB</servlet-name>
+        <url-pattern>/ServletPGB</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletPG</servlet-name>
+        <url-pattern>/ServletPG</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Servletparameter</servlet-name>
+        <url-pattern>/Servletparameter</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
